@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Three框架</title>
+    <script src="three.js"></script>
+    <style type="text/css">
+        body { margin: 0; }
+        canvas { width: 100%; height: 100% }
+    </style>
+</head>
+<body>
+    <script>
+        var scene;
+        var camera;
+        var renderer;
+        var geometry;
+        var material;
+        var cube;
+
+        function init() {
+            // 屏幕
+            scene = new THREE.Scene();
+            // 摄像机
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+            // 渲染器
+            renderer = new THREE.WebGLRenderer();
+            // 渲染器大小
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // 几何体
+            geometry = new THREE.Geometry();
+            geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+            geometry.vertices.push(new THREE.Vector3(0, 10, 0));
+            geometry.vertices.push(new THREE.Vector3(10, 0, 0));
+            // 材质
+            material = new THREE.LineBasicMaterial({color: 0x0000ff});
+            line = new THREE.Line(geometry, material);
+            scene.add(line);
+            camera.position.set(0, 0, 100);
+            camera.lookAt(0, 0, 0);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        init();
+        animate();
+    </script>
+</body>
+</html>

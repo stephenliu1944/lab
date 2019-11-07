@@ -1,0 +1,22 @@
+{
+  "name": "my-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "my-cli": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "my-cli": "index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "dependencies": {
+    "shelljs": "^0.8.3"
+  }
+}
