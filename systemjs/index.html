@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Basic SystemJS Example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="./bluebird.core.min.js"></script>
+	<script type="text/javascript" src="./fetch.umd.js"></script>
+	<script type="systemjs-importmap" src="http://localhost:8080/importmap.json"></script>
+	<!-- load a module from CDN -->
+	<!-- <script type="systemjs-module" src="import:single-spa"></script> -->
+	<!-- load SystemJS itself from CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
+	<script src="./system-css-extra.js"></script>
+	<script>
+		function start() {
+			System.import('app.js').then(function (a) {
+				a.doConsole();
+				a.doAlert();
+			});
+		}
+
+		function importCSS() {
+			System.import('global.css').then(function () {
+				var link = document.querySelector('link[href="' + System.resolve('global.css') + '"]');
+				link.setAttribute('data-href', link.href);
+			});
+		}
+
+		function enableCSS() {
+			var link = document.querySelector('link[data-href="' + System.resolve('global.css') + '"]');
+			link.href = link.getAttribute('data-href');
+		}
+
+		function disableCSS() {
+			var link = document.querySelector('link[data-href="' + System.resolve('global.css') + '"]');
+			link.href = '';
+		}
+	</script>
+</head>
+
+<body>
+	<button onclick="start()">Start</button>
+	<button onclick="importCSS()">Import CSS</button>
+	<button onclick="disableCSS()">Disable CSS</button>
+	<button onclick="enableCSS()">Enable CSS</button>
+</body>
+
+</html>
